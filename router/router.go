@@ -11,9 +11,13 @@ func Router() *gin.Engine {
 
 	r.LoadHTMLGlob("templates/*.html")
 	r.Static("/templates", "./templates")
+	r.Static("/images", "./templates/images")
+	r.Static("/css", "./templates/css")
+	r.Static("/fonts", "./templates/fonts")
+	r.Static("/js", "./templates/js")
 
-	// 登录页面
-	r.GET("/", service.Login)
+	// 默认页面
+	r.GET("/", service.IndexHtml)
 
 	// 管理员
 	r.POST("/manager/login", service.ManagerLogin)
