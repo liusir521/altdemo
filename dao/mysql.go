@@ -13,8 +13,8 @@ var DB *gorm.DB
 func init() {
 	//配置MySQL连接参数
 	username := "root"       //账号
-	password := "12345678"   //密码
-	host := "127.0.0.1"  //数据库地址，可以是Ip或者域名
+	password := "root"       //密码
+	host := "127.0.0.1"      //数据库地址，可以是Ip或者域名
 	port := 3306             //数据库端口
 	Dbname := "athleticdemo" //数据库名
 	dsn := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=utf8&parseTime=True&loc=Local", username, password, host, port, Dbname)

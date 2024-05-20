@@ -29,6 +29,30 @@
     <!-- Template Style -->
     <link rel="stylesheet" href="/templates/css/style.css">
   </head>
+  <script>
+    function login() {
+      $.ajax({
+        url: '/login',
+        type: 'POST',
+        contentType: 'application/json',
+        data:JSON.stringify( {
+          username:document.getElementById('username').value ,
+          password:document.getElementById('password').value,
+          identity:document.getElementById('identity').value,
+        }),
+        success: function(response) {
+          // 处理响应数据
+          if(response.code===200){
+            alert("登录成功")
+            window.location.href = "/templates/index-02.html";
+          }else{
+            alert("登录失败，账号或密码错误")
+          }
+        },
+      });
+    }
+
+    </script>
   <body>
 
     <!--=================================
@@ -201,17 +225,17 @@
     Banner -->
     <section class="banner banner-01">
       <div id="main-slider" class="swiper-container">
-        <div class="slider-social">
-          <div class="container">
-            <div class="slider-social-info">
-              <ul class="list-unstyled mb-0">
-                <li><a href="#"> FB </a></li>
-                <li><a href="#"> IG </a></li>
-                <li><a href="#"> TW </a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
+<!--        <div class="slider-social">-->
+<!--          <div class="container">-->
+<!--            <div class="slider-social-info">-->
+<!--              <ul class="list-unstyled mb-0">-->
+<!--                <li><a href="#"> FB </a></li>-->
+<!--                <li><a href="#"> IG </a></li>-->
+<!--                <li><a href="#"> TW </a></li>-->
+<!--              </ul>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
         <div class="swiper-wrapper">
           <div class="swiper-slide align-items-center d-flex slide-01 header-position" style="background-image: url(images/home-01/banner-bg.jpg); background-repeat: no-repeat; background-size: cover; background-position: center;">
             <div class="pattern-01" data-swiper-animation="fadeIn" data-duration="1.5s" data-delay="1.0s"><img class="img-fluid vert-move" src="images/home-01/pattern-01.png" alt=""></div>
@@ -219,10 +243,24 @@
             <div class="container-fluid">                
               <div class="row">
                 <div class="col-12 col-lg-6 position-relative">
-                  <h1 class="text-white text-start" data-swiper-animation="fadeInUp" data-duration="1.5s" data-delay="1.0s">Football Is Just Awesome</h1>
-                  <p class="text-white" data-swiper-animation="fadeInUp" data-duration="1.5s" data-delay="2.0s">Lorem ipsum dolor sit amet, con secte tur adip si cin elit, do eius mod tempor in cidi dut ut la bore magna aliquat enim ad.</p>
-                  <a href="about-us.html" class="btn btn-white mt-3 mt-md-4" data-swiper-animation="fadeInUp" data-duration="1.5s" data-delay="3.0s">Read More</a>
-                  <div class="pattern-02" data-swiper-animation="fadeIn" data-duration="5.5s" data-delay="1.0s"><img class="custom-animation img-fluid" src="images/home-01/pattern-02.png" alt=""></div>
+<!--                  <h1 class="text-white text-start" data-swiper-animation="fadeInUp" data-duration="1.5s" data-delay="1.0s">Football Is Just Awesome</h1>-->
+<!--                  <p class="text-white" data-swiper-animation="fadeInUp" data-duration="1.5s" data-delay="2.0s">Lorem ipsum dolor sit amet, con secte tur adip si cin elit, do eius mod tempor in cidi dut ut la bore magna aliquat enim ad.</p>-->
+<!--                  <a href="about-us.html" class="btn btn-white mt-3 mt-md-4" data-swiper-animation="fadeInUp" data-duration="1.5s" data-delay="3.0s">Read More</a>-->
+<!--                  <div class="pattern-02" data-swiper-animation="fadeIn" data-duration="5.5s" data-delay="1.0s"><img class="custom-animation img-fluid" src="images/home-01/pattern-02.png" alt=""></div>-->
+                  <input class="form-control" id="username" type="text" placeholder="用户名">
+                  <br>
+                  <input class="form-control" id="password" type="password" placeholder="密码">
+                  <br>
+                  <select class="form-select" id="identity" aria-label="Default select example">
+                    <option selected>身份</option>
+                    <option value="1">用户</option>
+                    <option value="2">管理员</option>
+                    <option value="3">赛事方</option>
+                    <option value="4">赛事管理员</option>
+                  </select>
+                  <br>
+                  <button type="button" onclick="login()" class="btn btn-primary">登录</button>
+                  <button type="button" style="margin-left: 30%" class="btn btn-primary">注册</button>
                 </div>
                 <div class="col-12 col-lg-6 d-none d-lg-flex">
                   <div class="banner-img">
@@ -232,617 +270,617 @@
               </div>
             </div>
           </div>
-          <div class="swiper-slide align-items-center d-flex slide-02 header-position" style="background-image: url(images/home-01/banner-bg.jpg); background-repeat: no-repeat; background-size: cover; background-position: center;">
-            <div class="pattern-01" data-swiper-animation="fadeIn" data-duration="1.5s" data-delay="1.0s"><img class="img-fluid vert-move" src="images/home-01/pattern-01.png" alt=""></div>
-            <div class="pattern-03" data-swiper-animation="fadeIn" data-duration="1.5s" data-delay="1.0s"><img class="img-fluid vert-move" src="images/home-01/pattern-03.png" alt=""></div>
-            <div class="container-fluid">                
-              <div class="row align-items-center justify-content-center">
-                <div class="col-12 col-lg-4 col-xl-4 col-xxl-6 d-none position-relative d-lg-flex justify-content-center">
-                  <div class="banner-img">
-                    <img class="img-fluid vert-move" src="/templates/images/home-01/banner-img-02.png" data-swiper-animation="fadeIn" data-duration="5.0s" data-delay="1.0s" alt="">
-                  </div>
-                  <div class="pattern-04" data-swiper-animation="fadeIn" data-duration="5.5s" data-delay="1.0s"><img class="custom-animation" src="images/home-01/star-icon02.png" alt=""></div>
-                </div>
-                <div class="col-12 col-lg-6 col-xl-6 col-xxl-6 position-relative">
-                  <h1 class="text-white text-start" data-swiper-animation="fadeInUp" data-duration="1.5s" data-delay="1.0s">Football for the kicks</h1>
-                  <p class="text-white" data-swiper-animation="fadeInUp" data-duration="1.5s" data-delay="2.0s">Lorem ipsum dolor sit amet, con secte tur adip si cin elit, do eius mod tempor in cidi dut ut la bore magna aliquat enim ad.</p>
-                  <a href="/templates/about-us.html" class="btn btn-white mt-3 mt-md-4" data-swiper-animation="fadeInUp" data-duration="1.5s" data-delay="3.0s">Read More</a>
-                </div>
-              </div>
-            </div>
-          </div>
+<!--          <div class="swiper-slide align-items-center d-flex slide-02 header-position" style="background-image: url(images/home-01/banner-bg.jpg); background-repeat: no-repeat; background-size: cover; background-position: center;">-->
+<!--            <div class="pattern-01" data-swiper-animation="fadeIn" data-duration="1.5s" data-delay="1.0s"><img class="img-fluid vert-move" src="images/home-01/pattern-01.png" alt=""></div>-->
+<!--            <div class="pattern-03" data-swiper-animation="fadeIn" data-duration="1.5s" data-delay="1.0s"><img class="img-fluid vert-move" src="images/home-01/pattern-03.png" alt=""></div>-->
+<!--            <div class="container-fluid">                -->
+<!--              <div class="row align-items-center justify-content-center">-->
+<!--                <div class="col-12 col-lg-4 col-xl-4 col-xxl-6 d-none position-relative d-lg-flex justify-content-center">-->
+<!--                  <div class="banner-img">-->
+<!--                    <img class="img-fluid vert-move" src="/templates/images/home-01/banner-img-02.png" data-swiper-animation="fadeIn" data-duration="5.0s" data-delay="1.0s" alt="">-->
+<!--                  </div>-->
+<!--                  <div class="pattern-04" data-swiper-animation="fadeIn" data-duration="5.5s" data-delay="1.0s"><img class="custom-animation" src="images/home-01/star-icon02.png" alt=""></div>-->
+<!--                </div>-->
+<!--                <div class="col-12 col-lg-6 col-xl-6 col-xxl-6 position-relative">-->
+<!--                  <h1 class="text-white text-start" data-swiper-animation="fadeInUp" data-duration="1.5s" data-delay="1.0s">Football for the kicks</h1>-->
+<!--                  <p class="text-white" data-swiper-animation="fadeInUp" data-duration="1.5s" data-delay="2.0s">Lorem ipsum dolor sit amet, con secte tur adip si cin elit, do eius mod tempor in cidi dut ut la bore magna aliquat enim ad.</p>-->
+<!--                  <a href="/templates/about-us.html" class="btn btn-white mt-3 mt-md-4" data-swiper-animation="fadeInUp" data-duration="1.5s" data-delay="3.0s">Read More</a>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
         </div>
         <!-- Pagination -->
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-12 position-relative text-center">
-              <div class="pagination-button">
-                <div class="swiper-button-prev" tabindex="0" role="button" aria-label="Previous slide">Prev</div>
-                <div class="swiper-button-next" tabindex="0" role="button" aria-label="Next slide">Next</div>
-              </div>
-            </div>
-          </div>
-        </div>
+<!--        <div class="container">-->
+<!--          <div class="row">-->
+<!--            <div class="col-lg-12 position-relative text-center">-->
+<!--              <div class="pagination-button">-->
+<!--                <div class="swiper-button-prev" tabindex="0" role="button" aria-label="Previous slide">Prev</div>-->
+<!--                <div class="swiper-button-next" tabindex="0" role="button" aria-label="Next slide">Next</div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
       </div>
     </section>
     <!--=================================
     Banner -->
 
-    <!--=================================
-    Tournament Countdown -->
-    <section class="tournament-countdown">
-      <div class="container-fluid">
-        <div class="row align-items-center">
-          <div class="col-xl-4 col-lg-12 d-flex justify-content-center justify-content-xl-start text-center text-xl-start mb-4 mb-xl-0">
-            <div class="tournament-title">
-              <h2>Tournament starts in</h2>
-              <span class="text-white">Semi-Final</span>
-            </div>
-          </div>
-          <div class="col-xl-4 col-lg-12 justify-content-lg-center mb-4 mb-xl-0">
-            <div class="countdown-main">
-              <div class="countdown">
-                <span class="days">00</span>
-                <p class="days_ref">Days</p>
-              </div>
-              <div class="countdown">
-                <span class="hours">00</span>
-                <p class="hours_ref">Hrs</p>
-              </div>
-              <div class="countdown">
-                <span class="minutes">00</span>
-                <p class="minutes_ref">Min</p>
-              </div>
-              <div class="countdown">
-                <span class="seconds">00</span>
-                <p class="seconds_ref">Sec</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-xl-4 col-lg-12">
-            <div class="upcoming-match d-lg-flex align-items-center justify-content-center justify-content-xl-end">
-              <div class="match-team">
-                <img class="img-fluid" src="/templates/images/home-01/team-logo-01.png" alt="">
-              </div>
-              <h2 class="px-4 px-lg-5">V.S</h2>
-              <div class="match-team">
-                <img class="img-fluid" src="/templates/images/home-01/team-logo-02.png" alt="">                  
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!--=================================
-    Tournament Countdown -->
+<!--    &lt;!&ndash;=================================-->
+<!--    Tournament Countdown &ndash;&gt;-->
+<!--    <section class="tournament-countdown">-->
+<!--      <div class="container-fluid">-->
+<!--        <div class="row align-items-center">-->
+<!--          <div class="col-xl-4 col-lg-12 d-flex justify-content-center justify-content-xl-start text-center text-xl-start mb-4 mb-xl-0">-->
+<!--            <div class="tournament-title">-->
+<!--              <h2>Tournament starts in</h2>-->
+<!--              <span class="text-white">Semi-Final</span>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="col-xl-4 col-lg-12 justify-content-lg-center mb-4 mb-xl-0">-->
+<!--            <div class="countdown-main">-->
+<!--              <div class="countdown">-->
+<!--                <span class="days">00</span>-->
+<!--                <p class="days_ref">Days</p>-->
+<!--              </div>-->
+<!--              <div class="countdown">-->
+<!--                <span class="hours">00</span>-->
+<!--                <p class="hours_ref">Hrs</p>-->
+<!--              </div>-->
+<!--              <div class="countdown">-->
+<!--                <span class="minutes">00</span>-->
+<!--                <p class="minutes_ref">Min</p>-->
+<!--              </div>-->
+<!--              <div class="countdown">-->
+<!--                <span class="seconds">00</span>-->
+<!--                <p class="seconds_ref">Sec</p>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="col-xl-4 col-lg-12">-->
+<!--            <div class="upcoming-match d-lg-flex align-items-center justify-content-center justify-content-xl-end">-->
+<!--              <div class="match-team">-->
+<!--                <img class="img-fluid" src="/templates/images/home-01/team-logo-01.png" alt="">-->
+<!--              </div>-->
+<!--              <h2 class="px-4 px-lg-5">V.S</h2>-->
+<!--              <div class="match-team">-->
+<!--                <img class="img-fluid" src="/templates/images/home-01/team-logo-02.png" alt="">                  -->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </section>-->
+<!--    &lt;!&ndash;=================================-->
+<!--    Tournament Countdown &ndash;&gt;-->
 
-    <!--=================================
-    About -->
-    <section class="space-ptb about">
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-12 col-lg-6 mb-4 mb-lg-0">
-            <div class="about-img fadeInUp animated">
-              <img class="img-fluid" src="/templates/images/home-01/about.jpg" alt="">
-            </div>
-          </div>
-          <div class="col-12 col-lg-6">
-            <div class="section-title mb-4 mb-lg-5">
-              <h2 class="mb-4">About The Football</h2>
-              <p class="text-white">Positive pleasure-oriented goals are much more powerful motivators than negative fear-based ones. Although each is successful separately, the right combination of both is the most powerful motivational force known to humankind.</p>
-              <p class="text-white">Give yourself the power of responsibility. Remind yourself the only thing stopping you is yourself.</p>
-            </div>
-            <div class="row counter-box">
-              <div class="col-sm-4">
-                <div class="counter mb-4 mb-lg-0">
-                  <div class="counter-number">
-                    <p>Games</p>
-                    <div class="counter-text"><h2 class="timer mb-0" data-to="200" data-speed="2000">200</h2><span>+</span></div>
-                  </div>
-                </div>
-              </div>
+<!--    &lt;!&ndash;=================================-->
+<!--    About &ndash;&gt;-->
+<!--    <section class="space-ptb about">-->
+<!--      <div class="container">-->
+<!--        <div class="row align-items-center">-->
+<!--          <div class="col-12 col-lg-6 mb-4 mb-lg-0">-->
+<!--            <div class="about-img fadeInUp animated">-->
+<!--              <img class="img-fluid" src="/templates/images/home-01/about.jpg" alt="">-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="col-12 col-lg-6">-->
+<!--            <div class="section-title mb-4 mb-lg-5">-->
+<!--              <h2 class="mb-4">About The Football</h2>-->
+<!--              <p class="text-white">Positive pleasure-oriented goals are much more powerful motivators than negative fear-based ones. Although each is successful separately, the right combination of both is the most powerful motivational force known to humankind.</p>-->
+<!--              <p class="text-white">Give yourself the power of responsibility. Remind yourself the only thing stopping you is yourself.</p>-->
+<!--            </div>-->
+<!--            <div class="row counter-box">-->
+<!--              <div class="col-sm-4">-->
+<!--                <div class="counter mb-4 mb-lg-0">-->
+<!--                  <div class="counter-number">-->
+<!--                    <p>Games</p>-->
+<!--                    <div class="counter-text"><h2 class="timer mb-0" data-to="200" data-speed="2000">200</h2><span>+</span></div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
 
-              <div class="col-sm-4">
-                <div class="counter mb-4 mb-lg-0">
-                  <div class="counter-number">
-                    <p>Goals</p>
-                    <div class="counter-text"><h2 class="timer mb-0" data-to="179" data-speed="2000">179</h2><span>+</span></div>
-                  </div>
-                </div>
-              </div>
+<!--              <div class="col-sm-4">-->
+<!--                <div class="counter mb-4 mb-lg-0">-->
+<!--                  <div class="counter-number">-->
+<!--                    <p>Goals</p>-->
+<!--                    <div class="counter-text"><h2 class="timer mb-0" data-to="179" data-speed="2000">179</h2><span>+</span></div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
 
-              <div class="col-sm-4">
-                <div class="counter mb-4 mb-md-0">
-                  <div class="counter-number">
-                    <p>Assist</p>
-                    <div class="counter-text"><h2 class="timer mb-0" data-to="146" data-speed="2000">146</h2><span>+</span></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-          </div>
-        </div>
-      </div>
-      <div class="about-bg">
-        <img class="img-fluid vert-move" src="/templates/images/home-01/pattern-04.png" alt="">
-      </div>
-    </section>
-    <!--=================================
-    About -->
+<!--              <div class="col-sm-4">-->
+<!--                <div class="counter mb-4 mb-md-0">-->
+<!--                  <div class="counter-number">-->
+<!--                    <p>Assist</p>-->
+<!--                    <div class="counter-text"><h2 class="timer mb-0" data-to="146" data-speed="2000">146</h2><span>+</span></div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            -->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="about-bg">-->
+<!--        <img class="img-fluid vert-move" src="/templates/images/home-01/pattern-04.png" alt="">-->
+<!--      </div>-->
+<!--    </section>-->
+<!--    &lt;!&ndash;=================================-->
+<!--    About &ndash;&gt;-->
 
-    <!--=================================
-    Live Videos -->
-    <section class="space-pb video-section">
-      <div class="container">
-        <div class="row">
-          <div class="col-12">
-            <div class="section-title">
-              <h2 class="mb-0 text-white">Live Videos</h2> 
-            </div>
-          </div>
-        </div>
-        <div class="row mt-4">
-          <div class="col-lg-12 col-xl-6">
-            <div class="video-box">
-              <div class="video-image"> 
-                <img class="img-fluid" src="/templates/images/home-01/video-bg.jpg" alt="image">
-                <a class="video-btn popup-youtube" href="https://www.youtube.com/watch?v=LgvseYYhqU0">
-                  <i class="fas fa-play"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-12 col-xl-6 mt-md-5 mt-xl-0">
-            <div class="video-style-vertical">
-              <div class="video-post">
-                <div class="video-image"> <img class="img-fluid" src="/templates/images/home-01/video-01.jpg" alt="">
-                  <div class="video-icon"><a href="https://youtu.be/n_Cn8eFo7u8" class="popup-youtube"><i class="fa-solid fa-video"></i></a></div>
-                </div>
-                <div class="video-post-details"> <span class="badge">Game</span>
-                  <h6 class="video-title"><a href="/templates/blog-single.html">Gaming is our passion. We create fun games that you'll love</a></h6>
-                  <div class="video-view"> <a href="#">10M views</a> <a href="#">6 days ago</a> </div>
-                </div>
-              </div>
-              <div class="video-post">
-                <div class="video-image"> <img class="img-fluid" src="/templates/images/home-01/video-02.jpg" alt="">
-                  <div class="video-icon"><a href="https://youtu.be/n_Cn8eFo7u8" class="popup-youtube"><i class="fa-solid fa-video"></i></a></div>
-                </div>
-                <div class="video-post-details"> <span class="badge">Sport</span>
-                  <h6 class="video-title"><a href="/templates/blog-single.html">Sport is important for good health</a></h6>
-                  <div class="video-view"> <a href="#">9M views</a> <a href="#">4 days ago</a> </div>
-                </div>
-              </div>
-              <div class="video-post">
-                <div class="video-image"> <img class="img-fluid" src="/templates/images/home-01/video-03.jpg" alt="">
-                  <div class="video-icon"><a href="https://youtu.be/n_Cn8eFo7u8" class="popup-youtube"><i class="fa-solid fa-video"></i></a></div>
-                </div>
-                <div class="video-post-details"> <span class="badge">Travel</span>
-                  <h6 class="video-title"><a href="/templates/blog-single.html">Affordable travel. Unforgettable experiences</a></h6>
-                  <div class="video-view"> <a href="#">7M views</a> <a href="#">3 days ago</a> </div>
-                </div>
-              </div>
-              <div class="video-post">
-                <div class="video-image"> <img class="img-fluid" src="/templates/images/home-01/video-04.jpg" alt="">
-                  <div class="video-icon"><a href="https://youtu.be/n_Cn8eFo7u8" class="popup-youtube"><i class="fa-solid fa-video"></i></a></div>
-                </div>
-                <div class="video-post-details"> <span class="badge">Lifestyle</span>
-                  <h6 class="video-title"><a href="/templates/blog-single.html">Everyone should believe in lifestyle</a></h6>
-                  <div class="video-view"> <a href="#">5M views</a> <a href="#">2 days ago</a> </div>
-                </div>
-              </div>
-              <div class="video-post">
-                <div class="video-image"> <img class="img-fluid" src="/templates/images/home-01/video-02.jpg" alt="">
-                  <div class="video-icon"><a href="https://youtu.be/n_Cn8eFo7u8" class="popup-youtube"><i class="fa-solid fa-video"></i></a></div>
-                </div>
-                <div class="video-post-details"> <span class="badge">Sport</span>
-                  <h6 class="video-title"><a href="/templates/blog-single.html">Sport is important for good health</a></h6>
-                  <div class="video-view"> <a href="#">9M views</a> <a href="#">4 days ago</a> </div>
-                </div>
-              </div>
-              <div class="video-post">
-                <div class="video-image"> <img class="img-fluid" src="/templates/images/home-01/video-04.jpg" alt="">
-                  <div class="video-icon"><a href="https://youtu.be/n_Cn8eFo7u8" class="popup-youtube"><i class="fa-solid fa-video"></i></a></div>
-                </div>
-                <div class="video-post-details"> <span class="badge">Lifestyle</span>
-                  <h6 class="video-title"><a href="/templates/blog-single.html">Everyone should believe in lifestyle</a></h6>
-                  <div class="video-view"> <a href="#">5M views</a> <a href="#">2 days ago</a> </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!--=================================
-    Live Videos -->
+<!--    &lt;!&ndash;=================================-->
+<!--    Live Videos &ndash;&gt;-->
+<!--    <section class="space-pb video-section">-->
+<!--      <div class="container">-->
+<!--        <div class="row">-->
+<!--          <div class="col-12">-->
+<!--            <div class="section-title">-->
+<!--              <h2 class="mb-0 text-white">Live Videos</h2> -->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="row mt-4">-->
+<!--          <div class="col-lg-12 col-xl-6">-->
+<!--            <div class="video-box">-->
+<!--              <div class="video-image"> -->
+<!--                <img class="img-fluid" src="/templates/images/home-01/video-bg.jpg" alt="image">-->
+<!--                <a class="video-btn popup-youtube" href="https://www.youtube.com/watch?v=LgvseYYhqU0">-->
+<!--                  <i class="fas fa-play"></i>-->
+<!--                </a>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="col-lg-12 col-xl-6 mt-md-5 mt-xl-0">-->
+<!--            <div class="video-style-vertical">-->
+<!--              <div class="video-post">-->
+<!--                <div class="video-image"> <img class="img-fluid" src="/templates/images/home-01/video-01.jpg" alt="">-->
+<!--                  <div class="video-icon"><a href="https://youtu.be/n_Cn8eFo7u8" class="popup-youtube"><i class="fa-solid fa-video"></i></a></div>-->
+<!--                </div>-->
+<!--                <div class="video-post-details"> <span class="badge">Game</span>-->
+<!--                  <h6 class="video-title"><a href="/templates/blog-single.html">Gaming is our passion. We create fun games that you'll love</a></h6>-->
+<!--                  <div class="video-view"> <a href="#">10M views</a> <a href="#">6 days ago</a> </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="video-post">-->
+<!--                <div class="video-image"> <img class="img-fluid" src="/templates/images/home-01/video-02.jpg" alt="">-->
+<!--                  <div class="video-icon"><a href="https://youtu.be/n_Cn8eFo7u8" class="popup-youtube"><i class="fa-solid fa-video"></i></a></div>-->
+<!--                </div>-->
+<!--                <div class="video-post-details"> <span class="badge">Sport</span>-->
+<!--                  <h6 class="video-title"><a href="/templates/blog-single.html">Sport is important for good health</a></h6>-->
+<!--                  <div class="video-view"> <a href="#">9M views</a> <a href="#">4 days ago</a> </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="video-post">-->
+<!--                <div class="video-image"> <img class="img-fluid" src="/templates/images/home-01/video-03.jpg" alt="">-->
+<!--                  <div class="video-icon"><a href="https://youtu.be/n_Cn8eFo7u8" class="popup-youtube"><i class="fa-solid fa-video"></i></a></div>-->
+<!--                </div>-->
+<!--                <div class="video-post-details"> <span class="badge">Travel</span>-->
+<!--                  <h6 class="video-title"><a href="/templates/blog-single.html">Affordable travel. Unforgettable experiences</a></h6>-->
+<!--                  <div class="video-view"> <a href="#">7M views</a> <a href="#">3 days ago</a> </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="video-post">-->
+<!--                <div class="video-image"> <img class="img-fluid" src="/templates/images/home-01/video-04.jpg" alt="">-->
+<!--                  <div class="video-icon"><a href="https://youtu.be/n_Cn8eFo7u8" class="popup-youtube"><i class="fa-solid fa-video"></i></a></div>-->
+<!--                </div>-->
+<!--                <div class="video-post-details"> <span class="badge">Lifestyle</span>-->
+<!--                  <h6 class="video-title"><a href="/templates/blog-single.html">Everyone should believe in lifestyle</a></h6>-->
+<!--                  <div class="video-view"> <a href="#">5M views</a> <a href="#">2 days ago</a> </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="video-post">-->
+<!--                <div class="video-image"> <img class="img-fluid" src="/templates/images/home-01/video-02.jpg" alt="">-->
+<!--                  <div class="video-icon"><a href="https://youtu.be/n_Cn8eFo7u8" class="popup-youtube"><i class="fa-solid fa-video"></i></a></div>-->
+<!--                </div>-->
+<!--                <div class="video-post-details"> <span class="badge">Sport</span>-->
+<!--                  <h6 class="video-title"><a href="/templates/blog-single.html">Sport is important for good health</a></h6>-->
+<!--                  <div class="video-view"> <a href="#">9M views</a> <a href="#">4 days ago</a> </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="video-post">-->
+<!--                <div class="video-image"> <img class="img-fluid" src="/templates/images/home-01/video-04.jpg" alt="">-->
+<!--                  <div class="video-icon"><a href="https://youtu.be/n_Cn8eFo7u8" class="popup-youtube"><i class="fa-solid fa-video"></i></a></div>-->
+<!--                </div>-->
+<!--                <div class="video-post-details"> <span class="badge">Lifestyle</span>-->
+<!--                  <h6 class="video-title"><a href="/templates/blog-single.html">Everyone should believe in lifestyle</a></h6>-->
+<!--                  <div class="video-view"> <a href="#">5M views</a> <a href="#">2 days ago</a> </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </section>-->
+<!--    &lt;!&ndash;=================================-->
+<!--    Live Videos &ndash;&gt;-->
 
-    <!--=================================
-    Latest Results -->
-    <section class="space-ptb latest-results">
-      <div class="container">
-        <div class="row">
-          <div class="col-12">
-            <div class="section-title text-center">
-              <h2 class="mb-0 text-white">Latest Results</h2> 
-            </div>
-          </div>
-        </div>
-        <div class="row mt-5 align-items-center">
-          <div class="col-md-12 col-lg-4 text-center mb-4 mb-lg-0">
-            <div class="d-lg-flex align-items-center">
-              <h3>Ligers</h3>
-              <img class="img-fluid ms-0 ms-lg-4 ms-xl-5" src="/templates/images/home-01/team-logo-03.png" alt="">        
-            </div>
-          </div>
-          <div class="col-md-12 col-lg-4 text-center mb-4 mb-lg-0">
-            <h5>Premier League</h5>
-            <h2><span>03</span> : <span>02</span></h2>
-            <div class="time-location"><span class="time"><i class="fa-regular fa-clock"></i>1:30 PM</span><span class="location"><i class="fa-solid fa-location-dot"></i>Maracanã Stadium</span></div>
-          </div>
-          <div class="col-md-12 col-lg-4 text-center">
-            <div class="d-lg-flex align-items-center justify-content-end">
-              <img class="img-fluid me-0 me-lg-4 me-xl-5" src="/templates/images/home-01/team-logo-04.png" alt="">
-              <h3>Cheetahs</h3>                        
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!--=================================
-    Latest Results -->
+<!--    &lt;!&ndash;=================================-->
+<!--    Latest Results &ndash;&gt;-->
+<!--    <section class="space-ptb latest-results">-->
+<!--      <div class="container">-->
+<!--        <div class="row">-->
+<!--          <div class="col-12">-->
+<!--            <div class="section-title text-center">-->
+<!--              <h2 class="mb-0 text-white">Latest Results</h2> -->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="row mt-5 align-items-center">-->
+<!--          <div class="col-md-12 col-lg-4 text-center mb-4 mb-lg-0">-->
+<!--            <div class="d-lg-flex align-items-center">-->
+<!--              <h3>Ligers</h3>-->
+<!--              <img class="img-fluid ms-0 ms-lg-4 ms-xl-5" src="/templates/images/home-01/team-logo-03.png" alt="">        -->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="col-md-12 col-lg-4 text-center mb-4 mb-lg-0">-->
+<!--            <h5>Premier League</h5>-->
+<!--            <h2><span>03</span> : <span>02</span></h2>-->
+<!--            <div class="time-location"><span class="time"><i class="fa-regular fa-clock"></i>1:30 PM</span><span class="location"><i class="fa-solid fa-location-dot"></i>Maracanã Stadium</span></div>-->
+<!--          </div>-->
+<!--          <div class="col-md-12 col-lg-4 text-center">-->
+<!--            <div class="d-lg-flex align-items-center justify-content-end">-->
+<!--              <img class="img-fluid me-0 me-lg-4 me-xl-5" src="/templates/images/home-01/team-logo-04.png" alt="">-->
+<!--              <h3>Cheetahs</h3>                        -->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </section>-->
+<!--    &lt;!&ndash;=================================-->
+<!--    Latest Results &ndash;&gt;-->
 
-    <!--=================================
-    Upcoming Match -->
-    <section class="space-ptb match-schedule overlay-top">
-      <div class="container bg-light p-5">
-        <div class="row">
-          <div class="col-md-12 ">
-            <div class="section-title mb-5">
-              <h2>Match Schedule</h2>
-            </div>
-          </div>
-          <div class="col-sm-12">
-            <div class="owl-carousel arrow-top-right match-schedule-slider" data-nav-dots="false" data-nav-arrow="true" data-items="3" data-xl-items="2" data-lg-items="2" data-md-items="2" data-sm-items="2" data-xs-items="1" data-xx-items="1"  data-autoheight="true">
-              <div class="item">
-                <div class="upcoming-match">
-                  <div class="match-team">
-                    <img class="img-fluid" src="/templates/images/home-01/team-logo-05.png" alt="">
-                  </div>
-                  <div class="match-date-time">
-                    <span class="match-time">1:30 PM</span>
-                    <span class="match-date"><i class="fa-solid fa-calendar-days"></i>Mar 19 2023</span>
-                  </div>
-                  <div class="match-team">
-                    <img class="img-fluid" src="/templates/images/home-01/team-logo-06.png" alt="">                  
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="upcoming-match">
-                  <div class="match-team">
-                    <img class="img-fluid" src="/templates/images/home-01/team-logo-05.png" alt="">
-                  </div>
-                  <div class="match-date-time">
-                    <span class="match-time">2:45 PM</span>
-                    <span class="match-date"><i class="fa-solid fa-calendar-days"></i>Mar 25 2023</span>
-                  </div>
-                  <div class="match-team">
-                    <img class="img-fluid" src="/templates/images/home-01/team-logo-07.png" alt="">                  
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="upcoming-match">
-                  <div class="match-team">
-                    <img class="img-fluid" src="/templates/images/home-01/team-logo-05.png" alt="">
-                  </div>
-                  <div class="match-date-time">
-                    <span class="match-time">3:00 PM</span>
-                    <span class="match-date"><i class="fa-solid fa-calendar-days"></i>Apr 03 2023</span>
-                  </div>
-                  <div class="match-team">
-                    <img class="img-fluid" src="/templates/images/home-01/team-logo-08.png" alt="">                  
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="upcoming-match">
-                  <div class="match-team">
-                    <img class="img-fluid" src="/templates/images/home-01/team-logo-05.png" alt="">
-                  </div>
-                  <div class="match-date-time">
-                    <span class="match-time">3:20 PM</span>
-                    <span class="match-date"><i class="fa-solid fa-calendar-days"></i>Apr 15 2023</span>
-                  </div>
-                  <div class="match-team">
-                    <img class="img-fluid" src="/templates/images/home-01/team-logo-06.png" alt="">                  
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="upcoming-match">
-                  <div class="match-team">
-                    <img class="img-fluid" src="/templates/images/home-01/team-logo-05.png" alt="">
-                  </div>
-                  <div class="match-date-time">
-                    <span class="match-time">3:50 PM</span>
-                    <span class="match-date"><i class="fa-solid fa-calendar-days"></i>May 02 2023</span>
-                  </div>
-                  <div class="match-team">
-                    <img class="img-fluid" src="/templates/images/home-01/team-logo-07.png" alt="">                  
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!--=================================
-    Upcoming Match -->
+<!--    &lt;!&ndash;=================================-->
+<!--    Upcoming Match &ndash;&gt;-->
+<!--    <section class="space-ptb match-schedule overlay-top">-->
+<!--      <div class="container bg-light p-5">-->
+<!--        <div class="row">-->
+<!--          <div class="col-md-12 ">-->
+<!--            <div class="section-title mb-5">-->
+<!--              <h2>Match Schedule</h2>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="col-sm-12">-->
+<!--            <div class="owl-carousel arrow-top-right match-schedule-slider" data-nav-dots="false" data-nav-arrow="true" data-items="3" data-xl-items="2" data-lg-items="2" data-md-items="2" data-sm-items="2" data-xs-items="1" data-xx-items="1"  data-autoheight="true">-->
+<!--              <div class="item">-->
+<!--                <div class="upcoming-match">-->
+<!--                  <div class="match-team">-->
+<!--                    <img class="img-fluid" src="/templates/images/home-01/team-logo-05.png" alt="">-->
+<!--                  </div>-->
+<!--                  <div class="match-date-time">-->
+<!--                    <span class="match-time">1:30 PM</span>-->
+<!--                    <span class="match-date"><i class="fa-solid fa-calendar-days"></i>Mar 19 2023</span>-->
+<!--                  </div>-->
+<!--                  <div class="match-team">-->
+<!--                    <img class="img-fluid" src="/templates/images/home-01/team-logo-06.png" alt="">                  -->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="item">-->
+<!--                <div class="upcoming-match">-->
+<!--                  <div class="match-team">-->
+<!--                    <img class="img-fluid" src="/templates/images/home-01/team-logo-05.png" alt="">-->
+<!--                  </div>-->
+<!--                  <div class="match-date-time">-->
+<!--                    <span class="match-time">2:45 PM</span>-->
+<!--                    <span class="match-date"><i class="fa-solid fa-calendar-days"></i>Mar 25 2023</span>-->
+<!--                  </div>-->
+<!--                  <div class="match-team">-->
+<!--                    <img class="img-fluid" src="/templates/images/home-01/team-logo-07.png" alt="">                  -->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="item">-->
+<!--                <div class="upcoming-match">-->
+<!--                  <div class="match-team">-->
+<!--                    <img class="img-fluid" src="/templates/images/home-01/team-logo-05.png" alt="">-->
+<!--                  </div>-->
+<!--                  <div class="match-date-time">-->
+<!--                    <span class="match-time">3:00 PM</span>-->
+<!--                    <span class="match-date"><i class="fa-solid fa-calendar-days"></i>Apr 03 2023</span>-->
+<!--                  </div>-->
+<!--                  <div class="match-team">-->
+<!--                    <img class="img-fluid" src="/templates/images/home-01/team-logo-08.png" alt="">                  -->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="item">-->
+<!--                <div class="upcoming-match">-->
+<!--                  <div class="match-team">-->
+<!--                    <img class="img-fluid" src="/templates/images/home-01/team-logo-05.png" alt="">-->
+<!--                  </div>-->
+<!--                  <div class="match-date-time">-->
+<!--                    <span class="match-time">3:20 PM</span>-->
+<!--                    <span class="match-date"><i class="fa-solid fa-calendar-days"></i>Apr 15 2023</span>-->
+<!--                  </div>-->
+<!--                  <div class="match-team">-->
+<!--                    <img class="img-fluid" src="/templates/images/home-01/team-logo-06.png" alt="">                  -->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="item">-->
+<!--                <div class="upcoming-match">-->
+<!--                  <div class="match-team">-->
+<!--                    <img class="img-fluid" src="/templates/images/home-01/team-logo-05.png" alt="">-->
+<!--                  </div>-->
+<!--                  <div class="match-date-time">-->
+<!--                    <span class="match-time">3:50 PM</span>-->
+<!--                    <span class="match-date"><i class="fa-solid fa-calendar-days"></i>May 02 2023</span>-->
+<!--                  </div>-->
+<!--                  <div class="match-team">-->
+<!--                    <img class="img-fluid" src="/templates/images/home-01/team-logo-07.png" alt="">                  -->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </section>-->
+<!--    &lt;!&ndash;=================================-->
+<!--    Upcoming Match &ndash;&gt;-->
 
-    <!--=================================
-    Classic Players -->
-    <section class="space-pb classic-players px-0 px-md-5">
-      <div class="container-fluid">
-        <div class="row position-relative">
-          <div class="col-lg-4 pe-0 pe-lg-5">
-            <div class="section-title">
-              <h2 class="mb-0 text-white">Classic Players</h2> 
-              <p class="text-white mt-2">For those of you who are serious about having more, doing more, giving more and being more, success is achievable with some understanding of what to do, some discipline around planning and execution of those plans and belief that you can achieve your desires. </p>
-            </div>
-            <a href="#" class="btn btn-primary mt-4">View Match Details</a>
-          </div>
-          <div class="col-lg-8 mt-5 mt-lg-0">
-            <div class="owl-carousel" data-nav-dots="false" data-nav-arrow="true" data-items="2" data-xl-items="2" data-lg-items="1" data-md-items="1" data-sm-items="1" data-xs-items="1" data-xx-items="1"  data-autoheight="true">
-              <div class="item  mb-4 mb-lg-0">
-                <div class="player">
-                  <img class="img-fluid" src="/templates/images/home-01/team-01.jpg" alt="">                    
-                </div>
-                <div class="player-info">
-                  <span class="player-number">10</span>
-                  <div class="player-name">
-                    <h3 class="text-uppercase title"><a href="#">Jason McElwaine</a></h3>
-                    <span class="text-uppercase text-primary">Center</span>
-                  </div>
-                </div>
-              </div>
-              <div class="item mb-4 mb-lg-0">
-                <div class="player">
-                  <img class="img-fluid" src="/templates/images/home-01/team-02.jpg" alt="">
-                </div>
-                <div class="player-info">
-                  <span class="player-number">88</span>
-                  <div class="player-name">
-                    <h3 class="text-uppercase title"><a href="#">Cherry Blossom</a></h3>
-                    <span class="text-uppercase text-primary">Defenders</span>
-                  </div>
-                </div>
-              </div>    
-              <div class="item mb-4 mb-lg-0">
-                <div class="player">
-                  <img class="img-fluid" src="/templates/images/home-01/team-03.jpg" alt="">
-                </div>
-                <div class="player-info">
-                  <span class="player-number">07</span>
-                  <div class="player-name">
-                    <h3 class="text-uppercase title"><a href="#">Ginger Plant</a></h3>
-                    <span class="text-uppercase text-primary">Midfielders</span>
-                  </div>
-                </div>
-              </div>         
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!--=================================
-    Classic Players -->
+<!--    &lt;!&ndash;=================================-->
+<!--    Classic Players &ndash;&gt;-->
+<!--    <section class="space-pb classic-players px-0 px-md-5">-->
+<!--      <div class="container-fluid">-->
+<!--        <div class="row position-relative">-->
+<!--          <div class="col-lg-4 pe-0 pe-lg-5">-->
+<!--            <div class="section-title">-->
+<!--              <h2 class="mb-0 text-white">Classic Players</h2> -->
+<!--              <p class="text-white mt-2">For those of you who are serious about having more, doing more, giving more and being more, success is achievable with some understanding of what to do, some discipline around planning and execution of those plans and belief that you can achieve your desires. </p>-->
+<!--            </div>-->
+<!--            <a href="#" class="btn btn-primary mt-4">View Match Details</a>-->
+<!--          </div>-->
+<!--          <div class="col-lg-8 mt-5 mt-lg-0">-->
+<!--            <div class="owl-carousel" data-nav-dots="false" data-nav-arrow="true" data-items="2" data-xl-items="2" data-lg-items="1" data-md-items="1" data-sm-items="1" data-xs-items="1" data-xx-items="1"  data-autoheight="true">-->
+<!--              <div class="item  mb-4 mb-lg-0">-->
+<!--                <div class="player">-->
+<!--                  <img class="img-fluid" src="/templates/images/home-01/team-01.jpg" alt="">                    -->
+<!--                </div>-->
+<!--                <div class="player-info">-->
+<!--                  <span class="player-number">10</span>-->
+<!--                  <div class="player-name">-->
+<!--                    <h3 class="text-uppercase title"><a href="#">Jason McElwaine</a></h3>-->
+<!--                    <span class="text-uppercase text-primary">Center</span>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="item mb-4 mb-lg-0">-->
+<!--                <div class="player">-->
+<!--                  <img class="img-fluid" src="/templates/images/home-01/team-02.jpg" alt="">-->
+<!--                </div>-->
+<!--                <div class="player-info">-->
+<!--                  <span class="player-number">88</span>-->
+<!--                  <div class="player-name">-->
+<!--                    <h3 class="text-uppercase title"><a href="#">Cherry Blossom</a></h3>-->
+<!--                    <span class="text-uppercase text-primary">Defenders</span>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>    -->
+<!--              <div class="item mb-4 mb-lg-0">-->
+<!--                <div class="player">-->
+<!--                  <img class="img-fluid" src="/templates/images/home-01/team-03.jpg" alt="">-->
+<!--                </div>-->
+<!--                <div class="player-info">-->
+<!--                  <span class="player-number">07</span>-->
+<!--                  <div class="player-name">-->
+<!--                    <h3 class="text-uppercase title"><a href="#">Ginger Plant</a></h3>-->
+<!--                    <span class="text-uppercase text-primary">Midfielders</span>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>         -->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </section>-->
+<!--    &lt;!&ndash;=================================-->
+<!--    Classic Players &ndash;&gt;-->
 
-    <!--=================================
-    Points Table -->
-    <section class="space-ptb match-points-table">
-      <div class="container">
-        <div class="row">
-          <div class="col-12">
-            <div class="section-title text-center">
-              <h2 class="mb-0 text-white">Points Table</h2> 
-            </div>
-          </div>
-        </div>
-        <div class="row mt-5 align-items-center">
-          <div class="col-12">            
-            <div class="points-table">
-              <div class="table-responsive">
-                <table class="table">
-                  <thead class="">
-                    <tr>
-                      <th scope="col">POS</th>
-                      <th scope="col">TEAM</th>
-                      <th scope="col">MP</th>
-                      <th scope="col">W</th>
-                      <th scope="col">D</th>
-                      <th scope="col">L</th>
-                      <th scope="col">GF</th>
-                      <th scope="col">GA</th>
-                      <th scope="col">GD</th>
-                      <th scope="col">PTS</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th scope="row">1</th>
-                      <td><div class="team-name"><img class="img-fluid" src="/templates/images/home-01/team-logo-01.png" alt=""><span>Victorious Secret</span> </div></td>
-                      <td>6</td>
-                      <td>5</td>
-                      <td>0</td>
-                      <td>1</td>
-                      <td>20</td>
-                      <td>6</td>
-                      <td>14</td>
-                      <td>15</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">2</th>
-                      <td><div class="team-name"><img class="img-fluid" src="/templates/images/home-01/team-logo-02.png" alt=""><span>Ligers</span></div></td>
-                      <td>6</td>
-                      <td>5</td>
-                      <td>0</td>
-                      <td>1</td>
-                      <td>17</td>
-                      <td>6</td>
-                      <td>11</td>
-                      <td>15</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">3</th>
-                      <td><div class="team-name"><img class="img-fluid" src="/templates/images/home-01/team-logo-03.png" alt=""><span>Ladybugs United</span></div></td>
-                      <td>6</td>
-                      <td>4</td>
-                      <td>0</td>
-                      <td>2</td>
-                      <td>12</td>
-                      <td>7</td>
-                      <td>5</td>
-                      <td>12</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">4</th>
-                      <td><div class="team-name"><img class="img-fluid" src="/templates/images/home-01/team-logo-04.png" alt=""><span>Cheetahs</span></div></td>
-                      <td>6</td>
-                      <td>3</td>
-                      <td>2</td>
-                      <td>1</td>
-                      <td>7</td>
-                      <td>4</td>
-                      <td>3</td>
-                      <td>11</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">5</th>
-                      <td><div class="team-name"><img class="img-fluid" src="/templates/images/home-01/team-logo-05.png" alt=""><span>Chili Peppers</span></div></td>
-                      <td>6</td>
-                      <td>3</td>
-                      <td>1</td>
-                      <td>2</td>
-                      <td>10</td>
-                      <td>7</td>
-                      <td>3</td>
-                      <td>10</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">6</th>
-                      <td><div class="team-name"><img class="img-fluid" src="/templates/images/home-01/team-logo-06.png" alt=""><span>Hooligans FC</span></div></td>
-                      <td>6</td>
-                      <td>2</td>
-                      <td>1</td>
-                      <td>3</td>
-                      <td>12</td>
-                      <td>12</td>
-                      <td>0</td>
-                      <td>7</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">7</th>
-                      <td><div class="team-name"><img class="img-fluid" src="/templates/images/home-01/team-logo-07.png" alt=""><span>En Fuego CF</span></div></td>
-                      <td>6</td>
-                      <td>2</td>
-                      <td>0</td>
-                      <td>4</td>
-                      <td>11</td>
-                      <td>16</td>
-                      <td>-5</td>
-                      <td>6</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">8</th>
-                      <td><div class="team-name"><img class="img-fluid" src="/templates/images/home-01/team-logo-08.png" alt=""><span>Terminators</span></div></td>
-                      <td>6</td>
-                      <td>0</td>
-                      <td>0</td>
-                      <td>6</td>
-                      <td>2</td>
-                      <td>22</td>
-                      <td>-20</td>
-                      <td>0</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!--=================================
-    Points Table -->
+<!--    &lt;!&ndash;=================================-->
+<!--    Points Table &ndash;&gt;-->
+<!--    <section class="space-ptb match-points-table">-->
+<!--      <div class="container">-->
+<!--        <div class="row">-->
+<!--          <div class="col-12">-->
+<!--            <div class="section-title text-center">-->
+<!--              <h2 class="mb-0 text-white">Points Table</h2> -->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="row mt-5 align-items-center">-->
+<!--          <div class="col-12">            -->
+<!--            <div class="points-table">-->
+<!--              <div class="table-responsive">-->
+<!--                <table class="table">-->
+<!--                  <thead class="">-->
+<!--                    <tr>-->
+<!--                      <th scope="col">POS</th>-->
+<!--                      <th scope="col">TEAM</th>-->
+<!--                      <th scope="col">MP</th>-->
+<!--                      <th scope="col">W</th>-->
+<!--                      <th scope="col">D</th>-->
+<!--                      <th scope="col">L</th>-->
+<!--                      <th scope="col">GF</th>-->
+<!--                      <th scope="col">GA</th>-->
+<!--                      <th scope="col">GD</th>-->
+<!--                      <th scope="col">PTS</th>-->
+<!--                    </tr>-->
+<!--                  </thead>-->
+<!--                  <tbody>-->
+<!--                    <tr>-->
+<!--                      <th scope="row">1</th>-->
+<!--                      <td><div class="team-name"><img class="img-fluid" src="/templates/images/home-01/team-logo-01.png" alt=""><span>Victorious Secret</span> </div></td>-->
+<!--                      <td>6</td>-->
+<!--                      <td>5</td>-->
+<!--                      <td>0</td>-->
+<!--                      <td>1</td>-->
+<!--                      <td>20</td>-->
+<!--                      <td>6</td>-->
+<!--                      <td>14</td>-->
+<!--                      <td>15</td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                      <th scope="row">2</th>-->
+<!--                      <td><div class="team-name"><img class="img-fluid" src="/templates/images/home-01/team-logo-02.png" alt=""><span>Ligers</span></div></td>-->
+<!--                      <td>6</td>-->
+<!--                      <td>5</td>-->
+<!--                      <td>0</td>-->
+<!--                      <td>1</td>-->
+<!--                      <td>17</td>-->
+<!--                      <td>6</td>-->
+<!--                      <td>11</td>-->
+<!--                      <td>15</td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                      <th scope="row">3</th>-->
+<!--                      <td><div class="team-name"><img class="img-fluid" src="/templates/images/home-01/team-logo-03.png" alt=""><span>Ladybugs United</span></div></td>-->
+<!--                      <td>6</td>-->
+<!--                      <td>4</td>-->
+<!--                      <td>0</td>-->
+<!--                      <td>2</td>-->
+<!--                      <td>12</td>-->
+<!--                      <td>7</td>-->
+<!--                      <td>5</td>-->
+<!--                      <td>12</td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                      <th scope="row">4</th>-->
+<!--                      <td><div class="team-name"><img class="img-fluid" src="/templates/images/home-01/team-logo-04.png" alt=""><span>Cheetahs</span></div></td>-->
+<!--                      <td>6</td>-->
+<!--                      <td>3</td>-->
+<!--                      <td>2</td>-->
+<!--                      <td>1</td>-->
+<!--                      <td>7</td>-->
+<!--                      <td>4</td>-->
+<!--                      <td>3</td>-->
+<!--                      <td>11</td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                      <th scope="row">5</th>-->
+<!--                      <td><div class="team-name"><img class="img-fluid" src="/templates/images/home-01/team-logo-05.png" alt=""><span>Chili Peppers</span></div></td>-->
+<!--                      <td>6</td>-->
+<!--                      <td>3</td>-->
+<!--                      <td>1</td>-->
+<!--                      <td>2</td>-->
+<!--                      <td>10</td>-->
+<!--                      <td>7</td>-->
+<!--                      <td>3</td>-->
+<!--                      <td>10</td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                      <th scope="row">6</th>-->
+<!--                      <td><div class="team-name"><img class="img-fluid" src="/templates/images/home-01/team-logo-06.png" alt=""><span>Hooligans FC</span></div></td>-->
+<!--                      <td>6</td>-->
+<!--                      <td>2</td>-->
+<!--                      <td>1</td>-->
+<!--                      <td>3</td>-->
+<!--                      <td>12</td>-->
+<!--                      <td>12</td>-->
+<!--                      <td>0</td>-->
+<!--                      <td>7</td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                      <th scope="row">7</th>-->
+<!--                      <td><div class="team-name"><img class="img-fluid" src="/templates/images/home-01/team-logo-07.png" alt=""><span>En Fuego CF</span></div></td>-->
+<!--                      <td>6</td>-->
+<!--                      <td>2</td>-->
+<!--                      <td>0</td>-->
+<!--                      <td>4</td>-->
+<!--                      <td>11</td>-->
+<!--                      <td>16</td>-->
+<!--                      <td>-5</td>-->
+<!--                      <td>6</td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                      <th scope="row">8</th>-->
+<!--                      <td><div class="team-name"><img class="img-fluid" src="/templates/images/home-01/team-logo-08.png" alt=""><span>Terminators</span></div></td>-->
+<!--                      <td>6</td>-->
+<!--                      <td>0</td>-->
+<!--                      <td>0</td>-->
+<!--                      <td>6</td>-->
+<!--                      <td>2</td>-->
+<!--                      <td>22</td>-->
+<!--                      <td>-20</td>-->
+<!--                      <td>0</td>-->
+<!--                    </tr>-->
+<!--                  </tbody>-->
+<!--                </table>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </section>-->
+<!--    &lt;!&ndash;=================================-->
+<!--    Points Table &ndash;&gt;-->
 
-    <!--=================================
-    Latest News -->
-    <section class="space-ptb latest-news latest-news-pattern">
-      <div class="container">
-        <div class="row">
-          <div class="col-12">
-            <div class="section-title text-center">
-              <h2 class="mb-0 text-white">Latest News</h2> 
-            </div>
-          </div>
-        </div>
-        <div class="row mt-5">
-          <div class="col-lg-4 mb-4 mb-lg-0">
-            <div class="blog-post post-style-01">
-              <div class="blog-image"> 
-                <img class="img-fluid" src="/templates/images/home-01/blog/01.jpg" alt=""> 
-                <div class="blog-post-date"><span class="date">19</span><span class="month">Jan</span></div>
-                <div class="blog-post-meta">
-                  <div class="blog-post-author"><span><a href="#"><img src="/templates/images/avatar/01.jpg" alt="">Olive Yew</a></span></div>
-                  <div class="blog-post-comments text-white"><span class="text-primary">(0)</span> Comments</div>
-                </div>
-              </div>
-              <div class="blog-post-details"> 
-                <h5 class="blog-title mb-2"><a href="blog-single.html">A team above all. Above all a team.</a></h5>
-                <p class="text-white mb-4">Trying to go through life without clarity is similar to sailing a rudder-less ship – no good thing can or will happen!</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 mb-4 mb-lg-0">
-            <div class="blog-post post-style-01">
-              <div class="blog-image"> 
-                <img class="img-fluid" src="/templates/images/home-01/blog/02.jpg" alt=""> 
-                <div class="blog-post-date"><span class="date">25</span><span class="month">Jan</span></div>
-                <div class="blog-post-meta">
-                  <div class="blog-post-author"><span><a href="#"><img src="/templates/images/avatar/02.jpg" alt="">Percy Vere</a></span></div>
-                  <div class="blog-post-comments text-white"><span class="text-primary">(0)</span> Comments</div>
-                </div>
-              </div>
-              <div class="blog-post-details"> 
-                <h5 class="blog-title mb-2"><a href="/templates/blog-single.html">Championships are won at practice.</a></h5>
-                <p class="text-white mb-4">The best way is to develop and follow a plan. Start with your goals in mind and then work backwards to develop the plan.</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="blog-post post-style-01">
-              <div class="blog-image"> 
-                <img class="img-fluid" src="/templates/images/home-01/blog/03.jpg" alt=""> 
-                <div class="blog-post-date"><span class="date">02</span><span class="month">Feb</span></div>
-                <div class="blog-post-meta">
-                  <div class="blog-post-author"><span><a href="#"><img src="/templates/images/avatar/03.jpg" alt="">Colin Sik</a></span></div>
-                  <div class="blog-post-comments text-white"><span class="text-primary">(0)</span> Comments</div>
-                </div>
-              </div>
-              <div class="blog-post-details"> 
-                <h5 class="blog-title mb-2"><a href="/templates/blog-single.html">We have a mission to win</a></h5>
-                <p class="text-white mb-4">It is truly amazing the damage that we, as parents, can inflict on our children. So why do we do it? For the most part,</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!--=================================
-    Latest News -->
+<!--    &lt;!&ndash;=================================-->
+<!--    Latest News &ndash;&gt;-->
+<!--    <section class="space-ptb latest-news latest-news-pattern">-->
+<!--      <div class="container">-->
+<!--        <div class="row">-->
+<!--          <div class="col-12">-->
+<!--            <div class="section-title text-center">-->
+<!--              <h2 class="mb-0 text-white">Latest News</h2> -->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="row mt-5">-->
+<!--          <div class="col-lg-4 mb-4 mb-lg-0">-->
+<!--            <div class="blog-post post-style-01">-->
+<!--              <div class="blog-image"> -->
+<!--                <img class="img-fluid" src="/templates/images/home-01/blog/01.jpg" alt=""> -->
+<!--                <div class="blog-post-date"><span class="date">19</span><span class="month">Jan</span></div>-->
+<!--                <div class="blog-post-meta">-->
+<!--                  <div class="blog-post-author"><span><a href="#"><img src="/templates/images/avatar/01.jpg" alt="">Olive Yew</a></span></div>-->
+<!--                  <div class="blog-post-comments text-white"><span class="text-primary">(0)</span> Comments</div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="blog-post-details"> -->
+<!--                <h5 class="blog-title mb-2"><a href="blog-single.html">A team above all. Above all a team.</a></h5>-->
+<!--                <p class="text-white mb-4">Trying to go through life without clarity is similar to sailing a rudder-less ship – no good thing can or will happen!</p>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="col-lg-4 mb-4 mb-lg-0">-->
+<!--            <div class="blog-post post-style-01">-->
+<!--              <div class="blog-image"> -->
+<!--                <img class="img-fluid" src="/templates/images/home-01/blog/02.jpg" alt=""> -->
+<!--                <div class="blog-post-date"><span class="date">25</span><span class="month">Jan</span></div>-->
+<!--                <div class="blog-post-meta">-->
+<!--                  <div class="blog-post-author"><span><a href="#"><img src="/templates/images/avatar/02.jpg" alt="">Percy Vere</a></span></div>-->
+<!--                  <div class="blog-post-comments text-white"><span class="text-primary">(0)</span> Comments</div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="blog-post-details"> -->
+<!--                <h5 class="blog-title mb-2"><a href="/templates/blog-single.html">Championships are won at practice.</a></h5>-->
+<!--                <p class="text-white mb-4">The best way is to develop and follow a plan. Start with your goals in mind and then work backwards to develop the plan.</p>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="col-lg-4">-->
+<!--            <div class="blog-post post-style-01">-->
+<!--              <div class="blog-image"> -->
+<!--                <img class="img-fluid" src="/templates/images/home-01/blog/03.jpg" alt=""> -->
+<!--                <div class="blog-post-date"><span class="date">02</span><span class="month">Feb</span></div>-->
+<!--                <div class="blog-post-meta">-->
+<!--                  <div class="blog-post-author"><span><a href="#"><img src="/templates/images/avatar/03.jpg" alt="">Colin Sik</a></span></div>-->
+<!--                  <div class="blog-post-comments text-white"><span class="text-primary">(0)</span> Comments</div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="blog-post-details"> -->
+<!--                <h5 class="blog-title mb-2"><a href="/templates/blog-single.html">We have a mission to win</a></h5>-->
+<!--                <p class="text-white mb-4">It is truly amazing the damage that we, as parents, can inflict on our children. So why do we do it? For the most part,</p>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </section>-->
+<!--    &lt;!&ndash;=================================-->
+<!--    Latest News &ndash;&gt;-->
 
     <!--=================================
     client -->
