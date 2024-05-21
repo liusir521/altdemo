@@ -6,21 +6,14 @@ import (
 )
 
 func IndexHtml(c *gin.Context) {
-	c.HTML(200, "index-02.html", nil)
-}
-
-type User struct {
-	Username string `json:"username"`
-	Password string `json:"password"`
-	Identity string `json:"identity"`
+	c.HTML(200, "index.html", nil)
 }
 
 func Login(c *gin.Context) {
-	// 从请求体中解析JSON数据到User结构体
-	var user User
-	if err := c.ShouldBindJSON(&user); err != nil {
-		c.JSON(400, gin.H{"error": "Invalid JSON format"})
-		return
-	}
-	fmt.Println(user)
+	username := c.PostForm("username")
+	password := c.PostForm("password")
+	select_role := c.PostForm("select_role")
+	fmt.Println("username:", username)
+	fmt.Println("password:", password)
+	fmt.Println("select_role:", select_role)
 }

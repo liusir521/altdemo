@@ -11,10 +11,11 @@ func Router() *gin.Engine {
 
 	r.LoadHTMLGlob("templates/*.html")
 	r.Static("/templates", "./templates")
-	r.Static("/images", "./templates/images")
-	r.Static("/css", "./templates/css")
-	r.Static("/fonts", "./templates/fonts")
-	r.Static("/js", "./templates/js")
+	r.Static("/images", "/templates/assets/images")
+	r.Static("/css", "/templates/assets/css")
+	r.Static("/scss", "/templates/assets/scss")
+	r.Static("/vendor", "/templates/assets/vendor")
+	r.Static("/js", "/templates/assets/js")
 
 	// 默认页面
 	r.GET("/", service.IndexHtml)
