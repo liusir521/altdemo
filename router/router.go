@@ -23,7 +23,6 @@ func Router() *gin.Engine {
 	r.POST("/login", service.Login)
 
 	// 管理员
-	r.POST("/manager/login", service.ManagerLogin)
 
 	return r
 }
