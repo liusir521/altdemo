@@ -8,6 +8,18 @@ import (
 	"strconv"
 )
 
+func OrganizerLogin(c *gin.Context) (*model.Organizer, string) {
+	account := c.PostForm("username")
+	password := c.PostForm("password")
+	passwd := helper.Sha256cry(password)
+	var og model.Organizer
+	err := dao.DB.Model(model.Organizer{}).Where("username=? and password=?", account, passwd).First(&og).Error
+	if err != nil {
+		return nil, "账号或密码错误"
+	}
+	return &og, "登录成功"
+}
+
 func Createogmanager(c *gin.Context) {
 	username := c.PostForm("username")
 	password := c.PostForm("password")
@@ -51,6 +63,38 @@ func CreateTeam(c *gin.Context) {
 		Racetype: racetype,
 		Image:    image,
 		Ogid:     int64(ogid),
+	}).Error
+	if err != nil {
+		c.JSON(200, gin.H{
+			"code": 0,
+			"msg":  "创建失败:" + err.Error(),
+		})
+	} else {
+		c.JSON(200, gin.H{
+			"code": 200,
+			"msg":  "创建成功",
+		})
+	}
+}
+
+// 赛事方创建球队队员
+func CreatePlayer(c *gin.Context) {
+	name := c.PostForm("name")
+	height := c.PostForm("height")
+	heightnum, _ := strconv.ParseFloat(height, 32)
+	weight := c.PostForm("weight")
+	weightnum, _ := strconv.ParseFloat(weight, 32)
+	teamid := c.PostForm("teamid")
+	teamidnum, _ := strconv.Atoi(teamid)
+	sex := c.PostForm("sex")
+	image := c.PostForm("image")
+	err := dao.DB.Create(&model.Players{
+		Name:   name,
+		Height: float32(heightnum),
+		Weight: float32(weightnum),
+		Teamid: int64(teamidnum),
+		Sex:    sex,
+		Image:  image,
 	}).Error
 	if err != nil {
 		c.JSON(200, gin.H{

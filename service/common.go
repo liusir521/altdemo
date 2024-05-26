@@ -15,16 +15,56 @@ func Login(c *gin.Context) {
 		fmt.Println(manager, str)
 		if manager != nil {
 			c.JSON(200, gin.H{
-				"code":      200,
-				"msg":       "登录成功",
-				"type":      1,
-				"nickname":  manager.Nickname,
-				"managerid": manager.Id,
+				"code": 200,
+				"msg":  "登录成功",
+				"data": manager,
 			})
 		} else {
 			c.JSON(200, gin.H{
 				"code": 0,
 				"msg":  str,
+			})
+		}
+	} else if type_role == "2" {
+		login, s := OrganizerLogin(c)
+		if login != nil {
+			c.JSON(200, gin.H{
+				"code": 200,
+				"msg":  "登录成功",
+				"data": login,
+			})
+		} else {
+			c.JSON(200, gin.H{
+				"code": 0,
+				"msg":  s,
+			})
+		}
+	} else if type_role == "3" {
+		login, s := OgManagerLogin(c)
+		if login != nil {
+			c.JSON(200, gin.H{
+				"code": 200,
+				"msg":  "登录成功",
+				"data": login,
+			})
+		} else {
+			c.JSON(200, gin.H{
+				"code": 0,
+				"msg":  s,
+			})
+		}
+	} else if type_role == "4" {
+		login, s := UserLogin(c)
+		if login != nil {
+			c.JSON(200, gin.H{
+				"code": 200,
+				"msg":  "登录成功",
+				"data": login,
+			})
+		} else {
+			c.JSON(200, gin.H{
+				"code": 0,
+				"msg":  s,
 			})
 		}
 	}
@@ -57,4 +97,8 @@ func Register(c *gin.Context) {
 			"msg":  "注册成功",
 		})
 	}
+}
+
+func GetTeam() {
+	
 }

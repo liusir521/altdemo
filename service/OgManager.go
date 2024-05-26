@@ -2,10 +2,23 @@ package service
 
 import (
 	"altdemo/dao"
+	"altdemo/helper"
 	"altdemo/model"
 	"github.com/gin-gonic/gin"
 	"strconv"
 )
+
+func OgManagerLogin(c *gin.Context) (*model.OgManager, string) {
+	account := c.PostForm("username")
+	password := c.PostForm("password")
+	passwd := helper.Sha256cry(password)
+	var ogmg model.OgManager
+	err := dao.DB.Model(model.OgManager{}).Where("username=? and password=?", account, passwd).First(&ogmg).Error
+	if err != nil {
+		return nil, "账号或密码错误"
+	}
+	return &ogmg, "登录成功"
+}
 
 // 赛事管理员创建赛事
 func OgmanagerCreateRace(c *gin.Context) {

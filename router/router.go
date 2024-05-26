@@ -19,6 +19,7 @@ func Router() *gin.Engine {
 	// 赛事方
 	r.POST("/organizer/createogmanager", service.Createogmanager)
 	r.POST("/organizer/createteam", service.CreateTeam)
+	r.POST("/organizer/createplayer", service.CreatePlayer)
 	r.POST("/organizer/pubtickets", service.Pubtickets)
 	r.POST("/organizer/pubgoods", service.PubGoods)
 
@@ -29,5 +30,12 @@ func Router() *gin.Engine {
 	r.POST("/ogmanager/endrace", service.EndRace)
 	r.POST("/ogmanager/addplace", service.AddPlace)
 	r.POST("/ogmanager/pubplaces", service.PubPlace)
+
+	// 用户
+	r.POST("/user/buytickets", service.BuyTickets)
+	r.POST("/user/buygoods", service.BuyGoods)
+
+	// get资源信息
+	r.GET("/team")
 	return r
 }
