@@ -36,6 +36,9 @@ func Router() *gin.Engine {
 	r.POST("/user/buygoods", service.BuyGoods)
 
 	// get资源信息
-	r.GET("/team")
+	r.GET("/team", service.GetTeam)
+	r.GET("/raceunstart", service.GetRaceUnstart)
+	r.GET("/teaminfo", service.GetTeamInfo)
+	r.GET("/tickets", service.GetTickets)
 	return r
 }

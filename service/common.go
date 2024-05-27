@@ -6,6 +6,7 @@ import (
 	"altdemo/model"
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"strconv"
 )
 
 func Login(c *gin.Context) {
@@ -99,6 +100,114 @@ func Register(c *gin.Context) {
 	}
 }
 
-func GetTeam() {
-	
+func GetTeam(c *gin.Context) {
+	ogid := c.Query("ogid")
+	atoi, err := strconv.Atoi(ogid)
+	if err != nil {
+		c.JSON(200, gin.H{
+			"code": 0,
+			"msg":  "参数错误",
+		})
+	} else {
+		var teams []model.Team
+		err := dao.DB.Table("team").Where("ogid = ?", atoi).Find(&teams).Error
+		if err != nil {
+			c.JSON(200, gin.H{
+				"code": 0,
+				"msg":  "查询失败:" + err.Error(),
+			})
+		} else {
+			c.JSON(200, gin.H{
+				"code": 200,
+				"msg":  "查询成功",
+				"data": teams,
+			})
+		}
+	}
+}
+
+func GetRaceUnstart(c *gin.Context) {
+	ogid := c.Query("ogid")
+	atoi, err := strconv.Atoi(ogid)
+	if err != nil {
+		c.JSON(200, gin.H{
+			"code": 0,
+			"msg":  "参数错误",
+		})
+	} else {
+		var races []model.RaceRecord
+		err := dao.DB.Table("racerecord").Where("ogid = ? AND status = ?", atoi, "未开始").Find(&races).Error
+		if err != nil {
+			c.JSON(200, gin.H{
+				"code": 0,
+				"msg":  "查询失败:" + err.Error(),
+			})
+		} else {
+			c.JSON(200, gin.H{
+				"code": 200,
+				"msg":  "查询成功",
+				"data": races,
+			})
+		}
+	}
+}
+
+func GetTeamInfo(c *gin.Context) {
+	teamid := c.Query("teamid")
+	atoi, err := strconv.Atoi(teamid)
+	if err != nil {
+		c.JSON(200, gin.H{
+			"code": 0,
+			"msg":  "参数错误",
+		})
+	} else {
+		var team []model.Team
+		err := dao.DB.Table("team").Where("id = ?", atoi).Find(&team).Error
+		if err != nil {
+			c.JSON(200, gin.H{
+				"code": 0,
+				"msg":  "查询失败:" + err.Error(),
+			})
+			return
+		}
+		var players []model.Players
+		err = dao.DB.Table("players").Where("teamid = ?", atoi).Find(&players).Error
+		if err != nil {
+			c.JSON(200, gin.H{
+				"code": 0,
+				"msg":  "查询失败:" + err.Error(),
+			})
+			return
+		}
+		var racehis []model.RaceRecord
+		err = dao.DB.Table("racerecord").Where("(teamid1 = ? or teamid2 = ?) AND status = ?", atoi, atoi, "已结束").Find(&racehis).Error
+		if err != nil {
+			c.JSON(200, gin.H{
+				"code": 0,
+				"msg":  "查询失败:" + err.Error(),
+			})
+			return
+		} else {
+			c.JSON(200, gin.H{
+				"code":    200,
+				"msg":     "查询成功",
+				"data":    team,
+				"players": players,
+				"racehis": racehis,
+			})
+		}
+	}
+}
+
+func GetTickets(c *gin.Context) {
+	//teamid := c.Query("teamid")
+	//atoi, err := strconv.Atoi(teamid)
+	//if err != nil {
+	//	c.JSON(200, gin.H{
+	//		"code": 0,
+	//		"msg":  "参数错误",
+	//	})
+	//} else {
+	//
+	//}
 }
