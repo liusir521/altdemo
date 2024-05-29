@@ -249,3 +249,124 @@ func GetGoods(c *gin.Context) {
 		})
 	}
 }
+
+// 获取用户购票记录
+func GetUserTicketsHis(c *gin.Context) {
+	userid := c.Query("userid")
+	atoi, err := strconv.Atoi(userid)
+	if err != nil {
+		c.JSON(200, gin.H{
+			"code": 0,
+			"msg":  "参数错误",
+		})
+	} else {
+		var tickets []map[string]interface{}
+		err := dao.DB.Table("ticketshis").Where("uid = ?", atoi).Find(&tickets).Error
+		if err != nil {
+			c.JSON(200, gin.H{
+				"code": 0,
+				"msg":  "查询失败:" + err.Error(),
+			})
+			return
+		} else {
+			for _, ticket := range tickets {
+				tid := ticket["tid"]
+				var ticketinfo model.Tickets
+				err := dao.DB.Table("tickets").Where("id = ?", tid).Find(&ticketinfo).Error
+				if err != nil {
+					c.JSON(200, gin.H{
+						"code": 0,
+						"msg":  "查询失败:" + err.Error(),
+					})
+					return
+				} else {
+					ticket["price"] = ticketinfo.Price
+					var race model.RaceRecord
+					dao.DB.Table("racerecord").Where("id = ?", ticketinfo.Raceid).Find(&race)
+					ticket["name"] = race.Name
+				}
+			}
+			c.JSON(200, gin.H{
+				"code": 200,
+				"msg":  "查询成功",
+				"data": tickets,
+			})
+		}
+	}
+}
+
+// 获取用户周边商品记录
+func GetUserGoodsHis(c *gin.Context) {
+	userid := c.Query("userid")
+	atoi, err := strconv.Atoi(userid)
+	if err != nil {
+		c.JSON(200, gin.H{
+			"code": 0,
+			"msg":  "参数错误",
+		})
+	} else {
+		var goods []map[string]interface{}
+		err := dao.DB.Table("boughthis").Where("uid = ?", atoi).Find(&goods).Error
+		if err != nil {
+			c.JSON(200, gin.H{
+				"code": 0,
+				"msg":  "查询失败:" + err.Error(),
+			})
+			return
+		} else {
+			for _, good := range goods {
+				gid := good["gid"]
+				var goodinfo model.Goods
+				err := dao.DB.Table("goods").Where("id = ?", gid).Find(&goodinfo).Error
+				if err != nil {
+					c.JSON(200, gin.H{
+						"code": 0,
+						"msg":  "查询失败:" + err.Error(),
+					})
+					return
+				} else {
+					good["name"] = goodinfo.Name
+					good["image"] = goodinfo.Image
+				}
+			}
+			c.JSON(200, gin.H{
+				"code": 200,
+				"msg":  "查询成功",
+				"data": goods,
+			})
+		}
+	}
+}
+
+// 获取可租用场地
+func UsablePlaces(c *gin.Context) {
+	var palces []map[string]interface{}
+	err := dao.DB.Table("place").Where("status = ?", "可出租").Find(&palces).Error
+	if err != nil {
+		c.JSON(200, gin.H{
+			"code": 0,
+			"msg":  "查询失败:" + err.Error(),
+		})
+		return
+	} else {
+		for _, palce := range palces {
+			ogid := palce["ogid"]
+			var og model.Organizer
+			err := dao.DB.Table("organizer").Where("id = ?", ogid).Find(&og).Error
+			if err != nil {
+				c.JSON(200, gin.H{
+					"code": 0,
+					"msg":  "查询失败:" + err.Error(),
+				})
+				return
+			} else {
+				palce["contact"] = og.Contact
+			}
+		}
+		c.JSON(200, gin.H{
+			"code": 200,
+			"msg":  "查询成功",
+			"data": palces,
+		})
+	}
+}

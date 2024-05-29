@@ -41,5 +41,8 @@ func Router() *gin.Engine {
 	r.GET("/teaminfo", service.GetTeamInfo)
 	r.GET("/tickets", service.GetTickets)
 	r.GET("/goods", service.GetGoods)
+	r.GET("/userticketshis", service.GetUserTicketsHis)
+	r.GET("/usergoodshis", service.GetUserGoodsHis)
+	r.GET("/usableplaces", service.UsablePlaces)
 	return r
 }
