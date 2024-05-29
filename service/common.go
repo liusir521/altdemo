@@ -199,15 +199,53 @@ func GetTeamInfo(c *gin.Context) {
 	}
 }
 
+// 查询所有在售票务
 func GetTickets(c *gin.Context) {
-	//teamid := c.Query("teamid")
-	//atoi, err := strconv.Atoi(teamid)
-	//if err != nil {
-	//	c.JSON(200, gin.H{
-	//		"code": 0,
-	//		"msg":  "参数错误",
-	//	})
-	//} else {
-	//
-	//}
+	var tickets []map[string]interface{}
+	err := dao.DB.Table("tickets").Where("status = ?", "在售").Find(&tickets).Error
+	if err != nil {
+		c.JSON(200, gin.H{
+			"code": 0,
+			"msg":  "查询失败:" + err.Error(),
+		})
+		return
+	}
+	for _, ticket := range tickets {
+		raceid := ticket["raceid"]
+		var race []model.RaceRecord
+		err := dao.DB.Table("racerecord").Where("id = ?", raceid).Find(&race).Error
+		if err != nil {
+			c.JSON(200, gin.H{
+				"code": 0,
+				"msg":  "查询失败:" + err.Error(),
+			})
+			return
+		} else {
+			ticket["race"] = race
+		}
+	}
+	c.JSON(200, gin.H{
+		"code": 200,
+		"msg":  "查询成功",
+		"data": tickets,
+	})
+}
+
+// 查询所有周边商品
+func GetGoods(c *gin.Context) {
+	var goods []model.Goods
+	err := dao.DB.Table("goods").Find(&goods).Error
+	if err != nil {
+		c.JSON(200, gin.H{
+			"code": 0,
+			"msg":  "查询失败:" + err.Error(),
+		})
+		return
+	} else {
+		c.JSON(200, gin.H{
+			"code": 200,
+			"msg":  "查询成功",
+			"data": goods,
+		})
+	}
 }

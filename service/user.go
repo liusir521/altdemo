@@ -48,6 +48,27 @@ func BuyTickets(c *gin.Context) {
 			"msg":  "剩余票不足",
 		})
 		return
+	} else if count-int64(countnum) == 0 {
+		dao.DB.Table("user").Where("id = ?", userid).Update("money", money-floatprice*float64(countnum))
+		dao.DB.Table("tickets").Where("id = ?", ticketsid).Update("count", gorm.Expr("count - ?", countnum))
+		dao.DB.Table("tickets").Where("id = ?", ticketsid).Update("status", "售罄")
+		err := dao.DB.Table("ticketshis").Create(&model.TicketsHis{
+			Uid:     int64(uid),
+			Tid:     int64(tid),
+			BuyTime: time.Now().Format("2006-01-02 15:04:05"),
+			Count:   int64(countnum),
+		}).Error
+		if err != nil {
+			c.JSON(200, gin.H{
+				"code": 0,
+				"msg":  "购买失败",
+			})
+		} else {
+			c.JSON(200, gin.H{
+				"code": 1,
+				"msg":  "购买成功",
+			})
+		}
 	} else {
 		dao.DB.Table("user").Where("id = ?", userid).Update("money", money-floatprice*float64(countnum))
 		dao.DB.Table("tickets").Where("id = ?", ticketsid).Update("count", gorm.Expr("count - ?", countnum))

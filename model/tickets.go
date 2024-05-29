@@ -6,6 +6,7 @@ type Tickets struct {
 	Raceid int64   `gorm:"column:raceid",json:"raceid"`
 	Price  float64 `gorm:"column:price",json:"price"`
 	Count  int64   `gorm:"column:count",json:"count"`
+	Status string  `gorm:"column:status",json:"status"`
 }
 
 func (Tickets) TableName() string {

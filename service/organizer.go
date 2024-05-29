@@ -121,6 +121,7 @@ func Pubtickets(c *gin.Context) {
 		Raceid: int64(raceidnum),
 		Price:  float64(pricenum),
 		Count:  int64(countnum),
+		Status: "在售",
 	}).Error
 	if err != nil {
 		c.JSON(200, gin.H{
