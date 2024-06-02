@@ -161,7 +161,8 @@ func GetTeamInfo(c *gin.Context) {
 			"msg":  "参数错误",
 		})
 	} else {
-		var team []model.Team
+		data := make(map[string]interface{}, 3)
+		var team map[string]interface{}
 		err := dao.DB.Table("team").Where("id = ?", atoi).Find(&team).Error
 		if err != nil {
 			c.JSON(200, gin.H{
@@ -170,6 +171,7 @@ func GetTeamInfo(c *gin.Context) {
 			})
 			return
 		}
+		data["team"] = team
 		var players []model.Players
 		err = dao.DB.Table("players").Where("teamid = ?", atoi).Find(&players).Error
 		if err != nil {
@@ -179,6 +181,7 @@ func GetTeamInfo(c *gin.Context) {
 			})
 			return
 		}
+		data["players"] = players
 		var racehis []model.RaceRecord
 		err = dao.DB.Table("racerecord").Where("(teamid1 = ? or teamid2 = ?) AND status = ?", atoi, atoi, "已结束").Find(&racehis).Error
 		if err != nil {
@@ -188,12 +191,11 @@ func GetTeamInfo(c *gin.Context) {
 			})
 			return
 		} else {
+			data["racehis"] = racehis
 			c.JSON(200, gin.H{
-				"code":    200,
-				"msg":     "查询成功",
-				"data":    team,
-				"players": players,
-				"racehis": racehis,
+				"code": 200,
+				"msg":  "查询成功",
+				"data": data,
 			})
 		}
 	}
@@ -367,6 +369,25 @@ func UsablePlaces(c *gin.Context) {
 			"code": 200,
 			"msg":  "查询成功",
 			"data": palces,
+		})
+	}
+}
+
+// 获取所有赛事方
+func GetAllOgs(c *gin.Context) {
+	var ogs []model.Organizer
+	err := dao.DB.Table("organizer").Find(&ogs).Error
+	if err != nil {
+		c.JSON(200, gin.H{
+			"code": 0,
+			"msg":  "查询失败:" + err.Error(),
+		})
+		return
+	} else {
+		c.JSON(200, gin.H{
+			"code": 200,
+			"msg":  "查询成功",
+			"data": ogs,
 		})
 	}
 }
